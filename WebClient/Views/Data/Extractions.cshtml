@@ -1,0 +1,36 @@
+﻿@using Model
+@model RespondAndDataList<ExtractionDto>
+@{
+    ViewBag.Title = "Добычи";
+}
+
+<h2>Добычи</h2>
+
+@if (Model.Data.Any())
+{
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Значение</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var extraction in Model.Data)
+                {
+                    <tr id="@extraction.ID">
+                        <td>@extraction.ID</td>
+                        <td>@extraction.Значение</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <br />
+}
+else
+{
+    <span>Добычи не найдены</span>
+}

@@ -1,0 +1,40 @@
+﻿@using Model
+@model RespondAndDataList<WellDto>
+@{
+    ViewBag.Title = "Скважины";
+}
+<h2>Скважины</h2>
+
+@if (Model.Data.Any())
+{
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Номер</th>
+                    <th scope="col">Добычи</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var well in Model.Data)
+                {
+                    <tr id="@well.ID">
+                        <td>@well.ID</td>
+                        <td>@well.Number</td>
+
+                        <td class="centered">
+                            <a href="@Url.Action("Extractions","Data", new { wellId = well.ID })"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <br />
+}
+else
+{
+    <span>Скважины не найдены</span>
+}

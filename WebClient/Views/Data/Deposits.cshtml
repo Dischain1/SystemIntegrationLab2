@@ -1,0 +1,42 @@
+﻿@using Model
+@model RespondAndDataList<DepositDto>
+@{
+    ViewBag.Title = "Месторождения";
+}
+
+<h2>Месторождения</h2>
+
+@if (Model.Data.Any())
+{
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Скважины</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var deposit in Model.Data)
+                {
+                    <tr id="@deposit.ID">
+                        <td>@deposit.ID</td>
+                        <td>@deposit.Name</td>
+                        <td class="centered">
+                            <a href="@Url.Action("Wells","Data", new { depositId = deposit.ID })"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <br />
+}
+else
+{
+    <span>Месторождения не найдены</span>
+}
+
+

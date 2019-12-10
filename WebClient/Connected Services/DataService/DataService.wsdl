@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DataService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/Model" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:element name="Test">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="TestResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="TestResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDeposits">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDepositsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="GetDepositsResult" nillable="true" type="q1:ArrayOfDepositDto" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadDeposits">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadDepositsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="ReadDepositsResult" nillable="true" type="q2:RespondAndDataListOfDepositDtoYgFqSxnr" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadWells">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="depositId" type="q3:guid" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadWellsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="ReadWellsResult" nillable="true" type="q4:RespondAndDataListOfWellDtoYgFqSxnr" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadExtractions">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="wellId" type="q5:guid" />
+            <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReadExtractionsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Model" minOccurs="0" name="ReadExtractionsResult" nillable="true" type="q6:RespondAndDataListOfExtractionDtoYgFqSxnr" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:complexType name="ArrayOfDepositDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="DepositDto" nillable="true" type="tns:DepositDto" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDepositDto" nillable="true" type="tns:ArrayOfDepositDto" />
+      <xs:complexType name="DepositDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ID" type="ser:guid" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DepositDto" nillable="true" type="tns:DepositDto" />
+      <xs:complexType name="RespondAndDataListOfDepositDtoYgFqSxnr">
+        <xs:annotation>
+          <xs:appinfo>
+            <GenericType Name="RespondAndDataListOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Model" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+              <GenericParameter Name="DepositDto" Namespace="http://schemas.datacontract.org/2004/07/Model" />
+            </GenericType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="tns:ArrayOfDepositDto" />
+          <xs:element minOccurs="0" name="Respond" nillable="true" type="tns:Respond" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="RespondAndDataListOfDepositDtoYgFqSxnr" nillable="true" type="tns:RespondAndDataListOfDepositDtoYgFqSxnr" />
+      <xs:complexType name="Respond">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ErrorMessage" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Succeded" type="xs:boolean" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Respond" nillable="true" type="tns:Respond" />
+      <xs:complexType name="RespondAndDataListOfWellDtoYgFqSxnr">
+        <xs:annotation>
+          <xs:appinfo>
+            <GenericType Name="RespondAndDataListOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Model" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+              <GenericParameter Name="WellDto" Namespace="http://schemas.datacontract.org/2004/07/Model" />
+            </GenericType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="tns:ArrayOfWellDto" />
+          <xs:element minOccurs="0" name="Respond" nillable="true" type="tns:Respond" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="RespondAndDataListOfWellDtoYgFqSxnr" nillable="true" type="tns:RespondAndDataListOfWellDtoYgFqSxnr" />
+      <xs:complexType name="ArrayOfWellDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="WellDto" nillable="true" type="tns:WellDto" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfWellDto" nillable="true" type="tns:ArrayOfWellDto" />
+      <xs:complexType name="WellDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ID" type="ser:guid" />
+          <xs:element minOccurs="0" name="Number" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="WellDto" nillable="true" type="tns:WellDto" />
+      <xs:complexType name="RespondAndDataListOfExtractionDtoYgFqSxnr">
+        <xs:annotation>
+          <xs:appinfo>
+            <GenericType Name="RespondAndDataListOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/Model" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+              <GenericParameter Name="ExtractionDto" Namespace="http://schemas.datacontract.org/2004/07/Model" />
+            </GenericType>
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" nillable="true" type="tns:ArrayOfExtractionDto" />
+          <xs:element minOccurs="0" name="Respond" nillable="true" type="tns:Respond" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="RespondAndDataListOfExtractionDtoYgFqSxnr" nillable="true" type="tns:RespondAndDataListOfExtractionDtoYgFqSxnr" />
+      <xs:complexType name="ArrayOfExtractionDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ExtractionDto" nillable="true" type="tns:ExtractionDto" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfExtractionDto" nillable="true" type="tns:ArrayOfExtractionDto" />
+      <xs:complexType name="ExtractionDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ID" type="ser:guid" />
+          <xs:element minOccurs="0" name="Значение" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ExtractionDto" nillable="true" type="tns:ExtractionDto" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataService_Test_InputMessage">
+    <wsdl:part name="parameters" element="tns:Test" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_Test_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetDeposits_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDeposits" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_GetDeposits_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDepositsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ReadDeposits_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadDeposits" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ReadDeposits_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadDepositsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ReadWells_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadWells" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ReadWells_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadWellsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ReadExtractions_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadExtractions" />
+  </wsdl:message>
+  <wsdl:message name="IDataService_ReadExtractions_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadExtractionsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDataService">
+    <wsdl:operation name="Test">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/Test" message="tns:IDataService_Test_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/TestResponse" message="tns:IDataService_Test_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDeposits">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/GetDeposits" message="tns:IDataService_GetDeposits_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/GetDepositsResponse" message="tns:IDataService_GetDeposits_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadDeposits">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/ReadDeposits" message="tns:IDataService_ReadDeposits_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/ReadDepositsResponse" message="tns:IDataService_ReadDeposits_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadWells">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/ReadWells" message="tns:IDataService_ReadWells_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/ReadWellsResponse" message="tns:IDataService_ReadWells_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadExtractions">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDataService/ReadExtractions" message="tns:IDataService_ReadExtractions_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDataService/ReadExtractionsResponse" message="tns:IDataService_ReadExtractions_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDataService" type="tns:IDataService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Test">
+      <soap:operation soapAction="http://tempuri.org/IDataService/Test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeposits">
+      <soap:operation soapAction="http://tempuri.org/IDataService/GetDeposits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadDeposits">
+      <soap:operation soapAction="http://tempuri.org/IDataService/ReadDeposits" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadWells">
+      <soap:operation soapAction="http://tempuri.org/IDataService/ReadWells" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadExtractions">
+      <soap:operation soapAction="http://tempuri.org/IDataService/ReadExtractions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataService">
+    <wsdl:port name="BasicHttpBinding_IDataService" binding="tns:BasicHttpBinding_IDataService">
+      <soap:address location="http://localhost:57243/DataService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
