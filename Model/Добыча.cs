@@ -12,7 +12,7 @@ namespace Model
         [Column(TypeName = "date")]
         public DateTime Дата { get; set; }
 
-        public int Значение { get; set; }
+        public double Значение { get; set; }
 
         public Guid ID_Скважины { get; set; }
 

@@ -17,7 +17,7 @@ namespace SystemIntegrationLab2
         [OperationContract]
         Respond CreateWell(Guid depositId, string number, string type, int depth, string drillingDate);
         [OperationContract]
-        Respond CreateExtraction(Guid wellId, string date, int value);
+        Respond CreateExtraction(Guid wellId, string date, double value);
 
         // read
         [OperationContract]
@@ -33,7 +33,7 @@ namespace SystemIntegrationLab2
         [OperationContract]
         Respond UpdateWell(Guid wellId, string number);
         [OperationContract]
-        Respond UpdateExtraction(Guid extractionId, string date, int value);
+        Respond UpdateExtraction(Guid extractionId, string date, double value);
 
         // delete
         [OperationContract]

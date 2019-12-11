@@ -186,7 +186,7 @@ namespace SystemIntegrationLab2
                 return Respond.CreateErrorRespond(e.Message);
             }
         }
-        public Respond UpdateExtraction(Guid extractionId, string date, int value)
+        public Respond UpdateExtraction(Guid extractionId, string date, double value)
         {
             try
             {
@@ -254,7 +254,7 @@ namespace SystemIntegrationLab2
                 return Respond.CreateErrorRespond(e.Message);
             }
         }
-        public Respond CreateExtraction(Guid wellId, string date, int value)
+        public Respond CreateExtraction(Guid wellId, string date, double value)
         {
             try
             {
