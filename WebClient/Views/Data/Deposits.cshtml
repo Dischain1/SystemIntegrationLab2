@@ -4,39 +4,47 @@
     ViewBag.Title = "Месторождения";
 }
 
-<h2>Месторождения</h2>
+<h2>Список месторождений</h2>
 
-@if (Model.Data.Any())
+@if (Model.Respond.Succeded)
 {
-    <div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Название</th>
-                    <th scope="col">Скважины</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var deposit in Model.Data)
-                {
-                    <tr id="@deposit.ID">
-                        <td>@deposit.ID</td>
-                        <td>@deposit.Name</td>
-                        <td class="centered">
-                            <a href="@Url.Action("Wells","Data", new { depositId = deposit.ID })"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                        </td>
+    if (Model.Data.Any())
+    {
+        var number = 1;
+        <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Название</th>
+                        <th scope="col" class="col-md-3">Скважины месторождения</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    @foreach (var deposit in Model.Data)
+                    {
+                        <tr id="@deposit.ID">
+                            <td>@number</td>
+                            <td>@deposit.Name</td>
+                            <td class="centered">
+                                <a href="@Url.Action("Wells","Data", new { depositId = deposit.ID })"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                            </td>
+                        </tr>
+                        number++;
+                    }
+                </tbody>
+            </table>
+        </div>
 
-    <br />
+        <br />
+    }
+    else
+    {
+        <span>Месторождения не найдены</span>
+    }
 }
 else
 {
-    <span>Месторождения не найдены</span>
+    <span>При обработке запроса произошла ошибка.</span>
+    <span>@Model.Respond.ErrorMessage</span>
 }
-
-

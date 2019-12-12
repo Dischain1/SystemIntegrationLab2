@@ -3,9 +3,9 @@ using System.Globalization;
 
 namespace Model
 {
-    public static class StringExtensions
+    public static class StringHelper
     {
-        private const string dateFormat = "dd:MM:yyyy";
+        public const string dateFormat = "dd:MM:yyyy";
         private static readonly CultureInfo culture = CultureInfo.CurrentCulture;
 
         public static DateTime GetDate(this string dateStr)

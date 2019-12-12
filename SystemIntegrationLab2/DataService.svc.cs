@@ -63,6 +63,8 @@ namespace SystemIntegrationLab2
         }
         public RespondAndDataList<ExtractionDto> ReadExtractions(Guid wellId, string dateFrom, string dateTo)
         {
+            var _dateFrom = dateFrom.GetDate();
+            var _dateTo = dateTo.GetDate();
             try
             {
                 List<ExtractionDto> extractions = db.Добыча
@@ -70,8 +72,8 @@ namespace SystemIntegrationLab2
                     (
                         e =>
                             e.ID_Скважины == wellId
-                            && e.Дата >= dateFrom.GetDate()
-                            && e.Дата <= dateTo.GetDate()
+                            && e.Дата >= _dateFrom
+                            && e.Дата <= _dateTo
                     )
                     .Select(x => new ExtractionDto { ID = x.ID_Добычи, Значение = x.Значение })
                     .ToList();

@@ -6,31 +6,42 @@
 
 <h2>Добычи</h2>
 
-@if (Model.Data.Any())
+@if (Model.Respond.Succeded)
 {
-    <div>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Значение</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var extraction in Model.Data)
-                {
-                    <tr id="@extraction.ID">
-                        <td>@extraction.ID</td>
-                        <td>@extraction.Значение</td>
+    if (Model.Data.Any())
+    {
+        var number = 1;
+        <div>
+            <table class="table table-striped" style="max-width:500px">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col" class="col-md-3">Значение</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
 
-    <br />
+                    @foreach (var extraction in Model.Data)
+                    {
+                        <tr id="@extraction.ID">
+                            <td>@number</td>
+                            <td>@extraction.Значение</td>
+                        </tr>
+                        number++;
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <br />
+    }
+    else
+    {
+        <span>Добычи не найдены</span>
+    }
 }
 else
 {
-    <span>Добычи не найдены</span>
+    <span>При обработке запроса произошла ошибка.</span>
+    <span>@Model.Respond.ErrorMessage</span>
 }
