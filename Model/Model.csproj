@@ -68,7 +68,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RespondModels.cs" />
+    <Compile Include="RespoceModels.cs" />
     <Compile Include="Добыча.cs" />
     <Compile Include="Месторождения.cs" />
     <Compile Include="Скважины.cs" />

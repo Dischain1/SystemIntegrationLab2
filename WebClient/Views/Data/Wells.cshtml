@@ -1,46 +1,43 @@
-﻿@using Model
-@model RespondAndDataList<WellDto>
+﻿@using WebClient.Models
+@model WellsViewModel
 @{
     ViewBag.Title = "Скважины";
 }
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
-<h2>Скважины</h2>
+<h3>Скважины месторождения "@Model.DepositName"</h3>
 
-@if (Model.Respond.Succeded)
+@if (Model.WellsResponce.Responce.Succeded)
 {
-    if (Model.Data.Any())
+    if (Model.WellsResponce.Data.Any())
     {
-
+        var number = 1;
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">#</th>
                     <th scope="col">Номер</th>
-                    <th scope="col"  class="col-md-3">Добычи</th>
+                    <th scope="col" class="col-md-3">Добычи</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var well in Model.Data)
+                @foreach (var well in Model.WellsResponce.Data)
                 {
                     <tr id="@well.ID">
-                        <td>@well.ID</td>
+                        <td>@number</td>
                         <td>@well.Number</td>
 
                         <td class="centered">
-                            @*href="@Url.Action("Extractions", "Data", new { wellId = well.ID })"*@
-                            @Html.Raw("<a><i class=\"glyphicon glyphicon-circle-arrow-right\" onclick=\"selectWell('" + well.ID + "')\"></i></a>")
+                            @Html.Raw("<a><i class=\"glyphicon glyphicon-circle-arrow-right\" onclick=\"selectWell('" + well.ID + "', '" + well.Number + "')\"></i></a>")
                         </td>
                     </tr>
                 }
@@ -49,14 +46,18 @@
     }
     else
     {
-        <span>Скважины не найдены</span>
+        <div style="margin: 10px">
+            <span>Скважины не найдены</span>
+        </div>
     }
 }
 else
 {
     <span>При обработке запроса произошла ошибка.</span>
-    <span>@Model.Respond.ErrorMessage</span>
+    <span>@Model.WellsResponce.Responce.ErrorMessage</span>
 }
+
+<button class="btn btn-outline-primary" onclick="ToDeposits()">К месторождениям</button>
 
 <div class="modal fade" id="date-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -97,34 +98,45 @@ else
 </div>
 
 <script type="text/javascript">
-    let selectedWell = undefined;
+    let selectedWellId = undefined;
+    let selectedWellNumber = undefined;
+
 
     $('#datetimepicker1').datetimepicker({
         format: 'DD/MM/YYYY',
+        date: new Date(2019, 8, 1), // Сентябрь - в js первый месяц нулевой. Это бред. Года и дни с 1
         useCurrent: false
     });
+
     $('#datetimepicker2').datetimepicker({
+        date: new Date(),
         format: 'DD/MM/YYYY',
     });
 
     $("#datetimepicker1").on("dp.change", function (e) {
         $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
     });
+
     $("#datetimepicker2").on("dp.change", function (e) {
         $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
     });
 
-    function selectWell(id) {
-        selectedWell = id;
+    function selectWell(id, number) {
+        selectedWellId = id;
+        selectedWellNumber = number;
         $('#date-modal').modal('show');
     }
 
     function submit() {
         let dateForm = $('#datetimepicker1').val();
         let dateTo = $('#datetimepicker2').val();
-        if (selectedWell !== undefined) {
-            window.location.href = `Extractions?wellId=${selectedWell}&dateFrom=${dateForm}&dateTo=${dateTo}`;
+        if (selectedWellId !== undefined) {
+            window.location.href = `Extractions?wellId=${selectedWellId}&wellNumber=${selectedWellNumber}&dateFrom=${dateForm}&dateTo=${dateTo}`;
         }
+    }
+
+     function ToDeposits() {
+        window.location.href = "@Url.Action("Deposits", "Data")";
     }
 </script>
 

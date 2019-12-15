@@ -4,35 +4,35 @@ using System.Runtime.Serialization;
 namespace Model
 {
     [DataContract]
-    public class RespondAndDataList<T>
+    public class ResponceAndDataList<T>
     {
         [DataMember]
-        public Respond Respond { get; set; }
+        public Responce Responce { get; set; }
 
         [DataMember]
         public List<T> Data { get; set; }
 
-        public RespondAndDataList()
+        public ResponceAndDataList()
         {
             Data = new List<T>();
         }
     }
 
     [DataContract]
-    public class Respond
+    public class Responce
     {
-        public static Respond CreateOkRespond()
+        public static Responce CreateOkRespond()
         {
-            return new Respond()
+            return new Responce()
             {
                 Succeded = true,
                 ErrorMessage = null
             };
         }
 
-        public static Respond CreateErrorRespond(string errorMessage)
+        public static Responce CreateErrorRespond(string errorMessage)
         {
-            return new Respond()
+            return new Responce()
             {
                 Succeded = false,
                 ErrorMessage = errorMessage

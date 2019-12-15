@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +167,8 @@
     <Content Include="Properties\DataSources\Model.DepositDto.datasource" />
     <Content Include="Properties\DataSources\Model.ExtractionDto.datasource" />
     <Content Include="Properties\DataSources\Model.WellDto.datasource" />
+    <Content Include="Properties\DataSources\Model.Respond.datasource" />
+    <Content Include="Properties\DataSources\Model.Responce.datasource" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -195,7 +198,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

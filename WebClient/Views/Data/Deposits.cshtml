@@ -1,12 +1,12 @@
 ﻿@using Model
-@model RespondAndDataList<DepositDto>
+@model ResponceAndDataList<DepositDto>
 @{
     ViewBag.Title = "Месторождения";
 }
 
-<h2>Список месторождений</h2>
+<h3>Список месторождений</h3>
 
-@if (Model.Respond.Succeded)
+@if (Model.Responce.Succeded)
 {
     if (Model.Data.Any())
     {
@@ -27,7 +27,7 @@
                             <td>@number</td>
                             <td>@deposit.Name</td>
                             <td class="centered">
-                                <a href="@Url.Action("Wells","Data", new { depositId = deposit.ID })"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                                <a href="@Url.Action("Wells","Data", new { depositId = deposit.ID, depositName = deposit.Name })"><i class="glyphicon glyphicon-circle-arrow-right"></i></a>
                             </td>
                         </tr>
                         number++;
@@ -40,11 +40,13 @@
     }
     else
     {
-        <span>Месторождения не найдены</span>
+        <div style="margin: 10px">
+            <span>Месторождения не найдены</span>
+        </div>
     }
 }
 else
 {
     <span>При обработке запроса произошла ошибка.</span>
-    <span>@Model.Respond.ErrorMessage</span>
+    <span>@Model.Responce.ErrorMessage</span>
 }

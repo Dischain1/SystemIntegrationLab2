@@ -1,31 +1,33 @@
-﻿@using Model
-@model RespondAndDataList<ExtractionDto>
+﻿@using WebClient.Models
+@model ExtractionsViewModel
 @{
     ViewBag.Title = "Добычи";
 }
 
-<h2>Добычи</h2>
+<h3>Добычи скважины "@Model.WellNumber" c @Model.DateFrom по @Model.DateTo</h3>
 
-@if (Model.Respond.Succeded)
+@if (Model.ExtractionResponce.Responce.Succeded)
 {
-    if (Model.Data.Any())
+    if (Model.ExtractionResponce.Data.Any())
     {
         var number = 1;
         <div>
-            <table class="table table-striped" style="max-width:500px">
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
+                        <th scope="col" class="col-md-3">Дата</th>
                         <th scope="col" class="col-md-3">Значение</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    @foreach (var extraction in Model.Data)
+                    @foreach (var extraction in Model.ExtractionResponce.Data)
                     {
                         <tr id="@extraction.ID">
                             <td>@number</td>
-                            <td>@extraction.Значение</td>
+                            <td>@extraction.Date.ToString("dd.MM.yyyy")</td>
+                            <td>@extraction.Value</td>
                         </tr>
                         number++;
                     }
@@ -37,11 +39,21 @@
     }
     else
     {
-        <span>Добычи не найдены</span>
+        <div style="margin: 10px">
+            <span>Добычи не найдены</span>
+        </div>
     }
 }
 else
 {
     <span>При обработке запроса произошла ошибка.</span>
-    <span>@Model.Respond.ErrorMessage</span>
+    <span>@Model.ExtractionResponce.Responce.ErrorMessage</span>
 }
+
+<button class="btn btn-outline-primary" onclick="ToDeposits()">К месторождениям</button>
+
+<script>
+    function ToDeposits() {
+        window.location.href = "@Url.Action("Deposits", "Data")";
+    }
+</script>

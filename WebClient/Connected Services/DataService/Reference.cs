@@ -21,29 +21,77 @@ namespace WebClient.DataService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/Test", ReplyAction="http://tempuri.org/IDataService/TestResponse")]
         System.Threading.Tasks.Task<string> TestAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetDeposits", ReplyAction="http://tempuri.org/IDataService/GetDepositsResponse")]
-        System.Collections.Generic.List<Model.DepositDto> GetDeposits();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateDeposit", ReplyAction="http://tempuri.org/IDataService/CreateDepositResponse")]
+        Model.Responce CreateDeposit(string name, string type, string openDate);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetDeposits", ReplyAction="http://tempuri.org/IDataService/GetDepositsResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.List<Model.DepositDto>> GetDepositsAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateDeposit", ReplyAction="http://tempuri.org/IDataService/CreateDepositResponse")]
+        System.Threading.Tasks.Task<Model.Responce> CreateDepositAsync(string name, string type, string openDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateWell", ReplyAction="http://tempuri.org/IDataService/CreateWellResponse")]
+        Model.Responce CreateWell(System.Guid depositId, string number, string type, int depth, string drillingDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateWell", ReplyAction="http://tempuri.org/IDataService/CreateWellResponse")]
+        System.Threading.Tasks.Task<Model.Responce> CreateWellAsync(System.Guid depositId, string number, string type, int depth, string drillingDate);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateExtraction", ReplyAction="http://tempuri.org/IDataService/CreateExtractionResponse")]
+        Model.Responce CreateExtraction(System.Guid wellId, string date, double value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateExtraction", ReplyAction="http://tempuri.org/IDataService/CreateExtractionResponse")]
+        System.Threading.Tasks.Task<Model.Responce> CreateExtractionAsync(System.Guid wellId, string date, double value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/ReadDeposits", ReplyAction="http://tempuri.org/IDataService/ReadDepositsResponse")]
-        Model.RespondAndDataList<Model.DepositDto> ReadDeposits();
+        Model.ResponceAndDataList<Model.DepositDto> ReadDeposits();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/ReadDeposits", ReplyAction="http://tempuri.org/IDataService/ReadDepositsResponse")]
-        System.Threading.Tasks.Task<Model.RespondAndDataList<Model.DepositDto>> ReadDepositsAsync();
+        System.Threading.Tasks.Task<Model.ResponceAndDataList<Model.DepositDto>> ReadDepositsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/ReadWells", ReplyAction="http://tempuri.org/IDataService/ReadWellsResponse")]
-        Model.RespondAndDataList<Model.WellDto> ReadWells(System.Guid depositId);
+        Model.ResponceAndDataList<Model.WellDto> ReadWells(System.Guid depositId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/ReadWells", ReplyAction="http://tempuri.org/IDataService/ReadWellsResponse")]
-        System.Threading.Tasks.Task<Model.RespondAndDataList<Model.WellDto>> ReadWellsAsync(System.Guid depositId);
+        System.Threading.Tasks.Task<Model.ResponceAndDataList<Model.WellDto>> ReadWellsAsync(System.Guid depositId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/ReadExtractions", ReplyAction="http://tempuri.org/IDataService/ReadExtractionsResponse")]
-        Model.RespondAndDataList<Model.ExtractionDto> ReadExtractions(System.Guid wellId, string dateFrom, string dateTo);
+        Model.ResponceAndDataList<Model.ExtractionDto> ReadExtractions(System.Guid wellId, string dateFrom, string dateTo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/ReadExtractions", ReplyAction="http://tempuri.org/IDataService/ReadExtractionsResponse")]
-        System.Threading.Tasks.Task<Model.RespondAndDataList<Model.ExtractionDto>> ReadExtractionsAsync(System.Guid wellId, string dateFrom, string dateTo);
+        System.Threading.Tasks.Task<Model.ResponceAndDataList<Model.ExtractionDto>> ReadExtractionsAsync(System.Guid wellId, string dateFrom, string dateTo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateDeposit", ReplyAction="http://tempuri.org/IDataService/UpdateDepositResponse")]
+        Model.Responce UpdateDeposit(System.Guid depositId, string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateDeposit", ReplyAction="http://tempuri.org/IDataService/UpdateDepositResponse")]
+        System.Threading.Tasks.Task<Model.Responce> UpdateDepositAsync(System.Guid depositId, string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateWell", ReplyAction="http://tempuri.org/IDataService/UpdateWellResponse")]
+        Model.Responce UpdateWell(System.Guid wellId, string number);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateWell", ReplyAction="http://tempuri.org/IDataService/UpdateWellResponse")]
+        System.Threading.Tasks.Task<Model.Responce> UpdateWellAsync(System.Guid wellId, string number);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateExtraction", ReplyAction="http://tempuri.org/IDataService/UpdateExtractionResponse")]
+        Model.Responce UpdateExtraction(System.Guid extractionId, string date, double value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateExtraction", ReplyAction="http://tempuri.org/IDataService/UpdateExtractionResponse")]
+        System.Threading.Tasks.Task<Model.Responce> UpdateExtractionAsync(System.Guid extractionId, string date, double value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteDeposit", ReplyAction="http://tempuri.org/IDataService/DeleteDepositResponse")]
+        Model.Responce DeleteDeposit(System.Guid depositId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteDeposit", ReplyAction="http://tempuri.org/IDataService/DeleteDepositResponse")]
+        System.Threading.Tasks.Task<Model.Responce> DeleteDepositAsync(System.Guid depositId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteWell", ReplyAction="http://tempuri.org/IDataService/DeleteWellResponse")]
+        Model.Responce DeleteWell(System.Guid wellId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteWell", ReplyAction="http://tempuri.org/IDataService/DeleteWellResponse")]
+        System.Threading.Tasks.Task<Model.Responce> DeleteWellAsync(System.Guid wellId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteExtraction", ReplyAction="http://tempuri.org/IDataService/DeleteExtractionResponse")]
+        Model.Responce DeleteExtraction(System.Guid extractionId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteExtraction", ReplyAction="http://tempuri.org/IDataService/DeleteExtractionResponse")]
+        System.Threading.Tasks.Task<Model.Responce> DeleteExtractionAsync(System.Guid extractionId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -81,36 +129,100 @@ namespace WebClient.DataService {
             return base.Channel.TestAsync();
         }
         
-        public System.Collections.Generic.List<Model.DepositDto> GetDeposits() {
-            return base.Channel.GetDeposits();
+        public Model.Responce CreateDeposit(string name, string type, string openDate) {
+            return base.Channel.CreateDeposit(name, type, openDate);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.List<Model.DepositDto>> GetDepositsAsync() {
-            return base.Channel.GetDepositsAsync();
+        public System.Threading.Tasks.Task<Model.Responce> CreateDepositAsync(string name, string type, string openDate) {
+            return base.Channel.CreateDepositAsync(name, type, openDate);
         }
         
-        public Model.RespondAndDataList<Model.DepositDto> ReadDeposits() {
+        public Model.Responce CreateWell(System.Guid depositId, string number, string type, int depth, string drillingDate) {
+            return base.Channel.CreateWell(depositId, number, type, depth, drillingDate);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> CreateWellAsync(System.Guid depositId, string number, string type, int depth, string drillingDate) {
+            return base.Channel.CreateWellAsync(depositId, number, type, depth, drillingDate);
+        }
+        
+        public Model.Responce CreateExtraction(System.Guid wellId, string date, double value) {
+            return base.Channel.CreateExtraction(wellId, date, value);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> CreateExtractionAsync(System.Guid wellId, string date, double value) {
+            return base.Channel.CreateExtractionAsync(wellId, date, value);
+        }
+        
+        public Model.ResponceAndDataList<Model.DepositDto> ReadDeposits() {
             return base.Channel.ReadDeposits();
         }
         
-        public System.Threading.Tasks.Task<Model.RespondAndDataList<Model.DepositDto>> ReadDepositsAsync() {
+        public System.Threading.Tasks.Task<Model.ResponceAndDataList<Model.DepositDto>> ReadDepositsAsync() {
             return base.Channel.ReadDepositsAsync();
         }
         
-        public Model.RespondAndDataList<Model.WellDto> ReadWells(System.Guid depositId) {
+        public Model.ResponceAndDataList<Model.WellDto> ReadWells(System.Guid depositId) {
             return base.Channel.ReadWells(depositId);
         }
         
-        public System.Threading.Tasks.Task<Model.RespondAndDataList<Model.WellDto>> ReadWellsAsync(System.Guid depositId) {
+        public System.Threading.Tasks.Task<Model.ResponceAndDataList<Model.WellDto>> ReadWellsAsync(System.Guid depositId) {
             return base.Channel.ReadWellsAsync(depositId);
         }
         
-        public Model.RespondAndDataList<Model.ExtractionDto> ReadExtractions(System.Guid wellId, string dateFrom, string dateTo) {
+        public Model.ResponceAndDataList<Model.ExtractionDto> ReadExtractions(System.Guid wellId, string dateFrom, string dateTo) {
             return base.Channel.ReadExtractions(wellId, dateFrom, dateTo);
         }
         
-        public System.Threading.Tasks.Task<Model.RespondAndDataList<Model.ExtractionDto>> ReadExtractionsAsync(System.Guid wellId, string dateFrom, string dateTo) {
+        public System.Threading.Tasks.Task<Model.ResponceAndDataList<Model.ExtractionDto>> ReadExtractionsAsync(System.Guid wellId, string dateFrom, string dateTo) {
             return base.Channel.ReadExtractionsAsync(wellId, dateFrom, dateTo);
+        }
+        
+        public Model.Responce UpdateDeposit(System.Guid depositId, string name) {
+            return base.Channel.UpdateDeposit(depositId, name);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> UpdateDepositAsync(System.Guid depositId, string name) {
+            return base.Channel.UpdateDepositAsync(depositId, name);
+        }
+        
+        public Model.Responce UpdateWell(System.Guid wellId, string number) {
+            return base.Channel.UpdateWell(wellId, number);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> UpdateWellAsync(System.Guid wellId, string number) {
+            return base.Channel.UpdateWellAsync(wellId, number);
+        }
+        
+        public Model.Responce UpdateExtraction(System.Guid extractionId, string date, double value) {
+            return base.Channel.UpdateExtraction(extractionId, date, value);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> UpdateExtractionAsync(System.Guid extractionId, string date, double value) {
+            return base.Channel.UpdateExtractionAsync(extractionId, date, value);
+        }
+        
+        public Model.Responce DeleteDeposit(System.Guid depositId) {
+            return base.Channel.DeleteDeposit(depositId);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> DeleteDepositAsync(System.Guid depositId) {
+            return base.Channel.DeleteDepositAsync(depositId);
+        }
+        
+        public Model.Responce DeleteWell(System.Guid wellId) {
+            return base.Channel.DeleteWell(wellId);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> DeleteWellAsync(System.Guid wellId) {
+            return base.Channel.DeleteWellAsync(wellId);
+        }
+        
+        public Model.Responce DeleteExtraction(System.Guid extractionId) {
+            return base.Channel.DeleteExtraction(extractionId);
+        }
+        
+        public System.Threading.Tasks.Task<Model.Responce> DeleteExtractionAsync(System.Guid extractionId) {
+            return base.Channel.DeleteExtractionAsync(extractionId);
         }
     }
 }

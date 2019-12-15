@@ -21,7 +21,7 @@ namespace SystemIntegrationLab2
         }
 
         #region ReadOperastions
-        public RespondAndDataList<DepositDto> ReadDeposits()
+        public ResponceAndDataList<DepositDto> ReadDeposits()
         {
             try
             {
@@ -29,18 +29,18 @@ namespace SystemIntegrationLab2
                     .Select(x => new DepositDto { ID = x.ID, Name = x.Название })
                     .ToList();
 
-                return new RespondAndDataList<DepositDto>
+                return new ResponceAndDataList<DepositDto>
                 {
-                    Respond = Respond.CreateOkRespond(),
+                    Responce = Responce.CreateOkRespond(),
                     Data = deposits
                 };
             }
             catch (Exception e)
             {
-                return new RespondAndDataList<DepositDto> { Respond = Respond.CreateErrorRespond(e.Message)};
+                return new ResponceAndDataList<DepositDto> { Responce = Responce.CreateErrorRespond(e.Message)};
             }
         }
-        public RespondAndDataList<WellDto> ReadWells(Guid depositId)
+        public ResponceAndDataList<WellDto> ReadWells(Guid depositId)
         {
             try
             {
@@ -49,19 +49,19 @@ namespace SystemIntegrationLab2
                     .Select(x => new WellDto { ID = x.ID, Number = x.Номер })
                     .ToList();
 
-                return new RespondAndDataList<WellDto>
+                return new ResponceAndDataList<WellDto>
                 {
-                    Respond = Respond.CreateOkRespond(),
+                    Responce = Responce.CreateOkRespond(),
                     Data = wells
                 };
 
             }
             catch (Exception e)
             {
-                return new RespondAndDataList<WellDto> { Respond = Respond.CreateErrorRespond(e.Message)};
+                return new ResponceAndDataList<WellDto> { Responce = Responce.CreateErrorRespond(e.Message)};
             }
         }
-        public RespondAndDataList<ExtractionDto> ReadExtractions(Guid wellId, string dateFrom, string dateTo)
+        public ResponceAndDataList<ExtractionDto> ReadExtractions(Guid wellId, string dateFrom, string dateTo)
         {
             var _dateFrom = dateFrom.GetDate();
             var _dateTo = dateTo.GetDate();
@@ -75,24 +75,24 @@ namespace SystemIntegrationLab2
                             && e.Дата >= _dateFrom
                             && e.Дата <= _dateTo
                     )
-                    .Select(x => new ExtractionDto { ID = x.ID_Добычи, Значение = x.Значение })
+                    .Select(x => new ExtractionDto { ID = x.ID_Добычи, Value = x.Значение, Date = x.Дата })
                     .ToList();
 
-                return new RespondAndDataList<ExtractionDto>
+                return new ResponceAndDataList<ExtractionDto>
                 {
-                    Respond = Respond.CreateOkRespond(),
+                    Responce = Responce.CreateOkRespond(),
                     Data = extractions
                 };
             }
             catch (Exception e)
             {
-                return new RespondAndDataList<ExtractionDto> { Respond = Respond.CreateErrorRespond(e.Message) };
+                return new ResponceAndDataList<ExtractionDto> { Responce = Responce.CreateErrorRespond(e.Message) };
             }
         }
         #endregion
 
         #region DeleteOperastions
-        public Respond DeleteDeposit(Guid depositId)
+        public Responce DeleteDeposit(Guid depositId)
         {
             try
             {
@@ -102,20 +102,20 @@ namespace SystemIntegrationLab2
                 {
                     db.Месторождения.Remove(deposit);
                     db.SaveChanges();
-                    return Respond.CreateOkRespond();
+                    return Responce.CreateOkRespond();
                 }
                 else
                 {
-                    return Respond.CreateErrorRespond("Сначала нужно удалить связанные Скважины.");
+                    return Responce.CreateErrorRespond("Сначала нужно удалить связанные Скважины.");
                 }
 
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
-        public Respond DeleteWell(Guid wellId)
+        public Responce DeleteWell(Guid wellId)
         {
             try
             {
@@ -125,19 +125,19 @@ namespace SystemIntegrationLab2
                     db.Скважины.Remove(well);
                     db.SaveChanges();
 
-                    return Respond.CreateOkRespond();
+                    return Responce.CreateOkRespond();
                 }
                 else
                 {
-                    return Respond.CreateErrorRespond("Сначала нужно удалить связанные Добычи.");
+                    return Responce.CreateErrorRespond("Сначала нужно удалить связанные Добычи.");
                 }
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
-        public Respond DeleteExtraction(Guid extractionId)
+        public Responce DeleteExtraction(Guid extractionId)
         {
             try
             {
@@ -146,17 +146,17 @@ namespace SystemIntegrationLab2
                 db.Добыча.Remove(extraction);
                 db.SaveChanges();
 
-                return Respond.CreateOkRespond();
+                return Responce.CreateOkRespond();
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
         #endregion
 
         #region UpdateOperastions
-        public Respond UpdateDeposit(Guid depositId, string name)
+        public Responce UpdateDeposit(Guid depositId, string name)
         {
             try
             {
@@ -164,14 +164,14 @@ namespace SystemIntegrationLab2
                 deposit.Название = name;
                 //db.Entry(deposit).State = EntityState.Modified;
                 db.SaveChangesAsync();
-                return Respond.CreateOkRespond();
+                return Responce.CreateOkRespond();
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
-        public Respond UpdateWell(Guid wellId, string number)
+        public Responce UpdateWell(Guid wellId, string number)
         {
             try
             {
@@ -180,15 +180,15 @@ namespace SystemIntegrationLab2
                 db.Entry(well).State = EntityState.Modified;
                 db.SaveChangesAsync();
 
-                return Respond.CreateOkRespond();
+                return Responce.CreateOkRespond();
 
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
-        public Respond UpdateExtraction(Guid extractionId, string date, double value)
+        public Responce UpdateExtraction(Guid extractionId, string date, double value)
         {
             try
             {
@@ -199,18 +199,18 @@ namespace SystemIntegrationLab2
                 db.Entry(extraction).State = EntityState.Modified;
                 db.SaveChangesAsync();
 
-                return Respond.CreateOkRespond();
+                return Responce.CreateOkRespond();
 
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
         #endregion
 
         #region CreateOperastions
-        public Respond CreateDeposit(string name, string type, string openDate)
+        public Responce CreateDeposit(string name, string type, string openDate)
         {
             try
             {
@@ -224,15 +224,15 @@ namespace SystemIntegrationLab2
                 db.Месторождения.Add(deposit);
                 db.SaveChangesAsync();
 
-                return Respond.CreateOkRespond();
+                return Responce.CreateOkRespond();
 
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
-        public Respond CreateWell(Guid depositId, string number, string type, int depth, string drillingDate)
+        public Responce CreateWell(Guid depositId, string number, string type, int depth, string drillingDate)
         {
             try
             {
@@ -248,15 +248,15 @@ namespace SystemIntegrationLab2
                 db.Скважины.Add(well);
 
                 db.SaveChangesAsync();
-                return Respond.CreateOkRespond();
+                return Responce.CreateOkRespond();
 
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
-        public Respond CreateExtraction(Guid wellId, string date, double value)
+        public Responce CreateExtraction(Guid wellId, string date, double value)
         {
             try
             {
@@ -270,12 +270,12 @@ namespace SystemIntegrationLab2
                 db.Добыча.Add(extraction);
 
                 db.SaveChangesAsync();
-                return Respond.CreateOkRespond();
+                return Responce.CreateOkRespond();
 
             }
             catch (Exception e)
             {
-                return Respond.CreateErrorRespond(e.Message);
+                return Responce.CreateErrorRespond(e.Message);
             }
         }
         #endregion

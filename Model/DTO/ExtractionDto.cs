@@ -5,6 +5,7 @@ namespace Model
     public partial class ExtractionDto
     {
         public Guid ID { get; set; }
-        public double Значение { get; set; }
+        public double Value { get; set; }
+        public DateTime Date { get; set; }
     }
 }
